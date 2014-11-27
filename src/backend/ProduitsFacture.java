@@ -13,7 +13,17 @@ public class ProduitsFacture {
     
     private Produit produit;
     private TypeQuantite typeQ;
-    private double qte;
+    private int qte;
     private double prix;
     
+    public ProduitsFacture(Produit produit, TypeQuantite typeQ, int qte, double prix){
+        this.produit = produit;
+        this.typeQ = typeQ;
+        this.qte = qte;
+        this.prix = prix;
+    }
+    
+    public double getPrixQte(){
+        return(qte*prix);
+    }
 }

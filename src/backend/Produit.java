@@ -19,5 +19,37 @@ public class Produit {
     private TypeQuantite [] typesDispo;
     private int prixU;
     private boolean actif;
+    private static int qte;
+    
+    
+    public void Produit(){
+        
+    }
+    
+    public static Produit getProduitAvNo(String noProduit){
+        
+        Produit produit = new Produit();
+        
+        //Recherche le produit avec le noProduit dans la bd
+        
+        //Sinon, produit = null;
+        
+        return produit;
+    }
+    
+    public static boolean validerProduit(String noProduit, int quantite){
+        
+        boolean retour = true;
+        
+        Produit produit = getProduitAvNo(noProduit);
+        
+        
+        if(qte < quantite || produit == null){
+            
+            retour = false;
+        }
+        
+        return retour;
+    }
     
 }

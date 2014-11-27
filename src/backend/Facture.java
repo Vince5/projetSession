@@ -5,6 +5,7 @@
  */
 package backend;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -20,6 +21,42 @@ public class Facture {
     private double totalApTaxes;
     //String pour l'instant
     private String [] modesPaiement;
-    private ProduitsFacture [] produits;
+    private ArrayList<ProduitsFacture> produits;
+    private int cptProduit = 0;
     
+    public void Facture(){
+        
+    }
+    
+    public void ajouterProduitFacture(String noProduit, int qte, TypeQuantite type, double prixUnitaire){
+        
+        Produit produit = Produit.getProduitAvNo(noProduit);
+        ProduitsFacture pF = new ProduitsFacture(produit, type, qte, prixUnitaire);
+        produits.add(pF);
+        totalAvTaxes = calculMontantAvTaxes();
+    }
+    
+    private double calculMontantAvTaxes(){
+        
+        double montant = 0;
+        
+        for( int i=0; i<produits.size();i++ ){
+            
+            montant+=produits.get(i).getPrixQte();
+            
+        }
+        return montant;
+    }
+    
+    private void confirmationFacture(){
+        
+        if(produits.isEmpty()){
+            //MessageErreur
+            
+        }else{
+        
+            totalApTaxes = FonctionsSysteme.CalculerTaxesQC(totalAvTaxes);
+            //Interface mode de paiement
+        }
+    }
 }
