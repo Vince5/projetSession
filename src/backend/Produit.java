@@ -27,10 +27,14 @@ public class Produit {
     public void Produit(){
         
     }
-    
+    /*
     public static void main(String[] args){
         System.out.println("allo");
         Produit.getProduitAvNo("IPOD30513956");
+    }
+    */
+    public String getNoProduit(){
+        return noProduit;
     }
     
     public static Produit getProduitAvNo(String noProduit){

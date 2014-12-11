@@ -36,6 +36,15 @@ public class Facture {
         totalAvTaxes = calculMontantAvTaxes();
     }
     
+    public void retirerProduitFacture(String noProduit) {
+        for(int i=0; i<produits.size(); i++){
+            if(produits.get(i).getProduit().getNoProduit().equals(noProduit)){
+                produits.remove(i);
+                break;
+            }
+        }
+    }
+    
     private double calculMontantAvTaxes(){
         
         double montant = 0;

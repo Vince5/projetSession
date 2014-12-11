@@ -23,6 +23,10 @@ public class ProduitsFacture {
         this.prix = prix;
     }
     
+    public Produit getProduit(){
+        return produit;
+    }
+    
     public double getPrixQte(){
         return(qte*prix);
     }
