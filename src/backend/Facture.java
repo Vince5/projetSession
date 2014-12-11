@@ -5,6 +5,10 @@
  */
 package backend;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -67,5 +71,46 @@ public class Facture {
             totalApTaxes = FonctionsSysteme.CalculerTaxesQC(totalAvTaxes);
             //Interface mode de paiement
         }
+    }
+    
+    public void sauvegarderFacture(Facture fac) {
+        
+        Connection conn = Connexion.connecter();
+        try{
+            Statement stmt = conn.createStatement();
+                ResultSet rs;
+                
+                Date date = new Date();
+                
+                rs = stmt.executeQuery("INSERT INTO Factures VALUES ('" + fac.getNoFacture() + 
+                        "'," + date.toString() + ",'" + fac.getCodeEmploye() + "'," + fac.getTotalApTaxes() + ");");
+                
+        }catch(SQLException e){
+             e.printStackTrace();
+        }
+        
+        Connexion.fermer(conn);
+        
+    }
+
+    /**
+     * @return the noFacture
+     */
+    public int getNoFacture() {
+        return noFacture;
+    }
+
+    /**
+     * @return the codeEmploye
+     */
+    public int getCodeEmploye() {
+        return codeEmploye;
+    }
+
+    /**
+     * @return the totalApTaxes
+     */
+    public double getTotalApTaxes() {
+        return totalApTaxes;
     }
 }
