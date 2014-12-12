@@ -5,6 +5,8 @@
  */
 package backend;
 
+import frontend.InterFacture;
+
 /**
  *
  * @author Vincent
@@ -17,7 +19,8 @@ public class ProjetSession {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        System.out.println("Début du projet");
+        
+        InterFacture inter = new InterFacture();
     }
     
 }

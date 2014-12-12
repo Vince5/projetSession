@@ -23,9 +23,25 @@ public class Produit {
     private boolean actif;
     private int qte;
     
+    Produit(String text, String text0, String text1, String text2, String text3, String text4) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Produit() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public void Produit(){
         
+    }
+    
+    public void Produit(String noProduit, String nom, String description, String quantite, String prixU, String codePFournisseur){
+        this.description = description;
+        this.nom = nom;
+        this.noProduit = noProduit;
+        this.codePFournisseur = codePFournisseur;
+        this.prixU = Double.parseDouble(prixU);
+        this.qte = Integer.parseInt(quantite);
     }
     /*
     public static void main(String[] args){
@@ -36,6 +52,119 @@ public class Produit {
     public String getNoProduit(){
         return noProduit;
     }
+    public void setNoProduit(String noProduit){
+        this.noProduit = noProduit;
+    }
+    
+    public void setFournisseur(String fournisseur){
+        this.fournisseur = fournisseur;
+    }
+    
+      public void setCodePFournisseur(String codePFournisseur){
+        this.codePFournisseur = codePFournisseur;
+    }
+    
+    public void setDescription(String description){
+        this.description = description;
+    }
+    
+    public void setNom(String nom){
+        this.nom = nom;
+    }
+    
+    public void setPrixU(double prixU){
+        this.prixU = prixU;
+    }
+    
+    public String getDescription(){
+        return description;
+    }
+    
+    public String getCodePFournisseur(){
+        return codePFournisseur;
+    }
+    
+    public String getNom(){
+        return nom;
+    }
+    
+    public double getPrixU(){
+        return prixU;
+    }
+    
+    public double getQte(){
+        return qte;
+    }
+    
+    
+    public String getfournisseur(){
+        return fournisseur;
+    }
+    
+    public void ajouteProduit(Produit prod) {
+        
+        Connection conn = Connexion.connecter();
+        try{
+            Statement stmt = conn.createStatement();
+                ResultSet rs;
+                
+                java.util.Date date = new java.util.Date();
+               
+                    
+                
+                rs = stmt.executeQuery("INSERT INTO Produits VALUES ('" + prod.getNoProduit() + 
+                        "'," + prod.getPrixU() + ",'" + prod.getCodePFournisseur() + "','" + prod.getDescription() + "','" + prod.getNom() + "," + prod.getQte());
+                
+        }catch(SQLException e){
+             e.printStackTrace();
+        }
+        
+        Connexion.fermer(conn);
+        
+    }
+    
+        public void modifierProduit(Produit prod) {
+        
+        Connection conn = Connexion.connecter();
+        try{
+            Statement stmt = conn.createStatement();
+                ResultSet rs;
+                
+                java.util.Date date = new java.util.Date();
+               
+                    
+                
+                rs = stmt.executeQuery("UPDATE Produits SET prix = " + prod.getPrixU() + "', codeProduitFournisseur = '" + prod.getCodePFournisseur() + "', description = '" + prod.getDescription() + "', nom = '" + prod.getNom() + ", quantiteEnStock = '" + prod.getQte() + ";'");
+                
+        }catch(SQLException e){
+             e.printStackTrace();
+        }
+        
+        Connexion.fermer(conn);
+        
+    }
+        
+          public void supprimerProduit(Produit prod) {
+        
+        Connection conn = Connexion.connecter();
+        try{
+            Statement stmt = conn.createStatement();
+                ResultSet rs;
+                
+                java.util.Date date = new java.util.Date();
+               
+                    
+                
+                rs = stmt.executeQuery("UPDATE Produits SET actif = false  WHERE noProduit = '" + prod.getNoProduit()+ "';");
+                
+        }catch(SQLException e){
+             e.printStackTrace();
+        }
+        
+        Connexion.fermer(conn);
+        
+    }     
+
     
     public static Produit getProduitAvNo(String noProduit){
         
@@ -51,7 +180,7 @@ public class Produit {
                 rs = stmt.executeQuery("SELECT * FROM Produits WHERE noProduit='" + noProduit + "'");
                 while ( rs.next() ) {
                     
-                    produit.noProduit = rs.getString("noProduit");
+                    produit.setNoProduit(rs.getString("noProduit"));
                     produit.nom = rs.getString("nom");
                     produit.description = rs.getString("description");
                     produit.prixU = rs.getDouble("prix");
@@ -80,12 +209,13 @@ public class Produit {
         Produit produit = getProduitAvNo(noProduit);
         
         
-        if(produit.qte < quantite || produit == null){
+        if(produit.getQte() < quantite || produit == null){
             
             retour = false;
         }
         
         return retour;
     }
+
     
 }

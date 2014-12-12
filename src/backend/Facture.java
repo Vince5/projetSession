@@ -5,12 +5,14 @@
  */
 package backend;
 
+import frontend.InterCreerFacture;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,17 +27,17 @@ public class Facture {
     private double totalApTaxes;
     //String pour l'instant
     private String [] modesPaiement;
-    private ArrayList<ProduitsFacture> produits;
+    private ArrayList<ProduitsFacture> produits = new ArrayList();
     private int cptProduit = 0;
     
     public void Facture(){
         
     }
     
-    public void ajouterProduitFacture(String noProduit, int qte, TypeQuantite type, double prixUnitaire){
+    public void ajouterProduitFacture(String noProduit, int qte, double prixUnitaire){
         
         Produit produit = Produit.getProduitAvNo(noProduit);
-        ProduitsFacture pF = new ProduitsFacture(produit, type, qte, prixUnitaire);
+        ProduitsFacture pF = new ProduitsFacture(produit, qte, prixUnitaire);
         produits.add(pF);
         totalAvTaxes = calculMontantAvTaxes();
     }
@@ -61,7 +63,7 @@ public class Facture {
         return montant;
     }
     
-    private void confirmationFacture(){
+    public void confirmationFacture(DefaultTableModel model){
         
         if(produits.isEmpty()){
             //MessageErreur
@@ -69,7 +71,11 @@ public class Facture {
         }else{
         
             totalApTaxes = FonctionsSysteme.CalculerTaxesQC(totalAvTaxes);
+            
             //Interface mode de paiement
+            InterCreerFacture inter2 = new InterCreerFacture(model);
+            
+            //sauvegarderFacture(this);
         }
     }
     
