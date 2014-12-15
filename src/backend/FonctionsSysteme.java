@@ -19,8 +19,9 @@ public class FonctionsSysteme {
         
         double montantFinal = 0;
         
-        montantFinal = montantAvTaxes * tps + montantAvTaxes;
-        montantFinal += montantFinal * tvq;
+        montantFinal = montantAvTaxes * tps;
+        montantFinal += montantAvTaxes * tvq;
+        montantFinal += montantAvTaxes;
         
         return montantFinal;
     }

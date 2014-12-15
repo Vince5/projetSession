@@ -65,17 +65,13 @@ public class Facture {
     
     public void confirmationFacture(DefaultTableModel model){
         
-        if(produits.isEmpty()){
-            //MessageErreur
-            
-        }else{
+        if(!produits.isEmpty()){
         
             totalApTaxes = FonctionsSysteme.CalculerTaxesQC(totalAvTaxes);
             
             //Interface mode de paiement
             InterCreerFacture inter2 = new InterCreerFacture(model, this);
             
-            //sauvegarderFacture(this);
         }
     }
     //Fonction non implémentée.

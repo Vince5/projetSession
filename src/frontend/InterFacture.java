@@ -188,7 +188,7 @@ public class InterFacture implements ActionListener {
                 double montant = leProduit.getPrixU()*quantite; 
                 model.addRow(new Object[]{x, leProduit.getNom(), leProduit.getPrixU(), quantite , montant});
                
-                facture.ajouterProduitFacture(noArticle, x, montant);
+                facture.ajouterProduitFacture(noArticle, quantite, leProduit.getPrixU());
                 
                 x++;
             }

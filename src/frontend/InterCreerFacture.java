@@ -139,6 +139,8 @@ public class InterCreerFacture implements ActionListener {
         
             try {
                 double totApTax = laFacture.getTotalApTaxes();
+                String totalString = String.format("%.2f", totApTax);
+                
                 File f = new File("facture"+laFacture.getNoFacture()+".txt");
                 FileWriter fw;
                 fw = new FileWriter(f);
@@ -151,7 +153,7 @@ public class InterCreerFacture implements ActionListener {
                     prixTot = inventaire.getModel().getValueAt(i, 4).toString();
                     str+= ""+nomProd+" \t\t\t\t "+Quant+" \t\t\t\t "+PrixUn+" \t\t\t\t "+prixTot+"\n";
                 }
-                str+= "Total:\t\t \t\t \t \t\t \t \t\t\t\t\t\t "+totApTax;
+                str+= "\nTotal:\t\t \t\t \t \t\t \t \t\t\t\t\t\t " + totalString;
                 
                 String modePaiement = "";
                 
