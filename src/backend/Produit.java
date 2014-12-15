@@ -23,18 +23,19 @@ public class Produit {
     private boolean actif;
     private int qte;
     
-    public void Produit(){
+    public Produit(String noProduit, String nom, String description, int quantite, Double prixU, String codePFournisseur){
+        this.noProduit = noProduit;
+        this.nom = nom;
+        this.description = description;
+        this.qte = quantite;
+        this.prixU = prixU;
+        this.codePFournisseur = codePFournisseur;
+    }
+    
+    public Produit(){
         
     }
     
-    public void Produit(String noProduit, String nom, String description, String quantite, String prixU, String codePFournisseur){
-        this.description = description;
-        this.nom = nom;
-        this.noProduit = noProduit;
-        this.codePFournisseur = codePFournisseur;
-        this.prixU = Double.parseDouble(prixU);
-        this.qte = Integer.parseInt(quantite);
-    }
     /*
     public static void main(String[] args){
         System.out.println("allo");
@@ -93,7 +94,7 @@ public class Produit {
         return fournisseur;
     }
     
-    public static void ajouteProduit(String noProduit, String nom, String desc, String quantite, String prix, String codePF) {
+    public void ajouteProduit() {
         
         Connection conn = Connexion.connecter();
         try{
@@ -105,7 +106,7 @@ public class Produit {
                     
                 
                 rs = stmt.executeQuery("INSERT INTO Produits VALUES ('" + noProduit + 
-                        "'," + prix + ",'" + codePF + "','" + desc + "','" + nom + "'," + quantite + ", 'true');");
+                        "'," + prixU + ",'" + codePFournisseur + "','" + description + "','" + nom + "'," + qte + ", 'true');");
                 
         }catch(SQLException e){
              //e.printStackTrace();
