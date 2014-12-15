@@ -25,11 +25,11 @@ public class ProjetSession {
         
         //InterFacture inter = new InterFacture();
         
-       Ajouters ajout = new Ajouters();
-       ajout.setVisible(true);
+       //Ajouters ajout = new Ajouters();
+       //ajout.setVisible(true);
         
-        //Supprimer sup = new Supprimer();
-        //sup.setVisible(true);
+        Supprimer sup = new Supprimer();
+        sup.setVisible(true);
     }
     
 }

@@ -176,7 +176,7 @@ public class InterFacture implements ActionListener {
             Produit leProduit = new Produit();
             leProduit.setNoProduit(noArticle) ;
             leProduit = Produit.getProduitAvNo(noArticle);
-            if(leProduit==null) {       ///------------------ A tester
+            if(leProduit==null) {       
                 JOptionPane.showMessageDialog(null,
                     "Code invalide",
                     "Erreur",

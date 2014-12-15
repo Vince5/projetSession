@@ -85,7 +85,7 @@ public class Produit {
         return prixU;
     }
     
-    public double getQte(){
+    public int getQte(){
         return qte;
     }
     
@@ -94,6 +94,7 @@ public class Produit {
         return fournisseur;
     }
     
+    //Ajoute un produit dans la base de données.
     public void ajouteProduit() {
         
         Connection conn = Connexion.connecter();
@@ -116,7 +117,8 @@ public class Produit {
         
     }
     
-    public static void modifierProduit(String noProduit, String nom, String desc, String quantite, String prix, String codePF) {
+    //Modifie un produit dans la base de données
+    public void modifierProduit() {
         
         Connection conn = Connexion.connecter();
         try{
@@ -126,7 +128,7 @@ public class Produit {
                 java.util.Date date = new java.util.Date();
                
                 rs = stmt.executeQuery("UPDATE Produits "
-                        + "SET prix = " + prix + ", codeProduitFournisseur = '" + codePF + "', description = '" + desc + "', nom = '" + nom + "', quantiteEnStock = " + quantite + " WHERE noProduit = '" + noProduit + "';");
+                        + "SET prix = " + prixU + ", codeProduitFournisseur = '" + codePFournisseur + "', description = '" + description + "', nom = '" + nom + "', quantiteEnStock = " + qte + " WHERE noProduit = '" + noProduit + "' AND actif='true';");
                 
         }catch(SQLException e){
              //e.printStackTrace();
@@ -135,8 +137,9 @@ public class Produit {
         Connexion.fermer(conn);
         
     }
-        
-    public static void supprimerProduit(String noProduit, String nom, String desc, String quantite, String prix, String codePF) {
+    
+    //Supprime un produit dans la base de données.
+    public void supprimerProduit() {
         
         Connection conn = Connexion.connecter();
         try{
@@ -160,7 +163,6 @@ public class Produit {
         
         Produit produit = new Produit();
         boolean vide = true;
-        //Recherche le produit avec le noProduit dans la bd
         
         Connection conn = Connexion.connecter();
         try{
@@ -191,21 +193,5 @@ public class Produit {
         
         return produit;
     }
-    
-    public static boolean validerProduit(String noProduit, int quantite){
-        
-        boolean retour = true;
-        
-        Produit produit = getProduitAvNo(noProduit);
-        
-        
-        if(produit.getQte() < quantite || produit == null){
-            
-            retour = false;
-        }
-        
-        return retour;
-    }
-
     
 }

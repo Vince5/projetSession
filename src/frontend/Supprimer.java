@@ -9,6 +9,7 @@ import backend.Produit;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,7 +34,7 @@ public class Supprimer extends javax.swing.JFrame implements ActionListener {
         add(jTextField6);
         jButton1.addActionListener(this);
         jButton2.addActionListener(this);
-        
+        jTextField1.addActionListener(this);
 
     }
 
@@ -65,18 +66,10 @@ public class Supprimer extends javax.swing.JFrame implements ActionListener {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("Supprimer");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        
 
         jButton2.setText("Modifier");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        
 
         jLabel1.setText("noProduit :");
 
@@ -185,90 +178,7 @@ public class Supprimer extends javax.swing.JFrame implements ActionListener {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         
-        //produit = new Produit(noProduit.getText(),nom.getText(),description.getText(),quantiteEnStock.getText(),prixU.getText(),codeProduitFournisseur.getText());
-        
-       if(evt.getSource() == jButton1){
-         
-         Produit.supprimerProduit(jTextField1.getText(), jTextField5.getText(), jTextField4.getText(), jTextField6.getText(), jTextField2.getText(), jTextField3.getText());  
-         
-         jTextField1.setText("");
-         jTextField2.setText("");
-         jTextField3.setText("");
-         jTextField4.setText("");
-         jTextField5.setText("");
-         jTextField6.setText("");        
-         
-       }
-         
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    public void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         
-        //produit = new Produit(noProduit.getText(),nom.getText(),description.getText(),quantiteEnStock.getText(),prixU.getText(),codeProduitFournisseur.getText());
-        
-       
-        
-        if(evt.getSource() == jButton2){
-         
-           Produit.modifierProduit(jTextField1.getText(), jTextField5.getText(), jTextField4.getText(), jTextField6.getText(), jTextField2.getText(), jTextField3.getText());  
-
-           jTextField1.setText("");
-           jTextField2.setText("");
-           jTextField3.setText("");
-           jTextField4.setText("");
-           jTextField5.setText("");
-           jTextField6.setText("");  
-         
-         
-        }   
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-    
-    /**
-     * @param args the command line arguments
-     *//*
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         *//*
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Supprimer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Supprimer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Supprimer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Supprimer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }*/
-        //</editor-fold>
-
-        /* Create and display the form */
-        /*java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Supprimer().setVisible(true);
-            }
-        });
-    }*/
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -291,30 +201,62 @@ public class Supprimer extends javax.swing.JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource() == jButton1){
+            
+            Produit leProduit = new Produit();
+            leProduit.setNoProduit(jTextField1.getText());
+            leProduit.supprimerProduit();
+            
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+            jTextField4.setText("");
+            jTextField5.setText("");
+            jTextField6.setText("");        
          
-         Produit.supprimerProduit(jTextField1.getText(), jTextField5.getText(), jTextField4.getText(), jTextField6.getText(), jTextField2.getText(), jTextField3.getText());  
-         
-         jTextField1.setText("");
-         jTextField2.setText("");
-         jTextField3.setText("");
-         jTextField4.setText("");
-         jTextField5.setText("");
-         jTextField6.setText("");        
-         
-       }
-        
-        if(e.getSource() == jButton2){
-         
-           Produit.modifierProduit(jTextField1.getText(), jTextField5.getText(), jTextField4.getText(), jTextField6.getText(), jTextField2.getText(), jTextField3.getText());  
-
-           jTextField1.setText("");
-           jTextField2.setText("");
-           jTextField3.setText("");
-           jTextField4.setText("");
-           jTextField5.setText("");
-           jTextField6.setText("");  
-         
-         
+        }else if(e.getSource() == jButton2){
+            
+            try{
+                String noP = jTextField1.getText();
+                String nomP = jTextField5.getText();
+                String descP = jTextField4.getText();
+                String fourP = jTextField3.getText();
+                int qteP = Integer.parseInt(jTextField6.getText());
+                Double prixP = Double.parseDouble(jTextField2.getText());
+                Produit leProduit = new Produit(noP, nomP, descP, qteP, prixP, fourP); 
+            
+                leProduit.modifierProduit();
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jTextField6.setText("");  
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,
+                "Entrez un nombre valide",
+                "Erreur",
+                JOptionPane.ERROR_MESSAGE);
+            }
+            
+            
+            
+        }else{
+            //Charge les attributs du produit du numéro qu'on a entré
+            
+            Produit leProduit = Produit.getProduitAvNo(jTextField1.getText());
+            
+            if(leProduit != null){
+                jTextField2.setText("" + leProduit.getPrixU() + "");
+                jTextField3.setText(leProduit.getCodePFournisseur());
+                jTextField4.setText(leProduit.getDescription());
+                jTextField5.setText(leProduit.getNom());
+                jTextField6.setText("" + leProduit.getQte() + "");
+            }else{
+                JOptionPane.showMessageDialog(null,
+                "Entrez un code valide",
+                "Erreur",
+                JOptionPane.INFORMATION_MESSAGE);
+            }
         }  
     }
 }
