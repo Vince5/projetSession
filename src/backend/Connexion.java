@@ -8,9 +8,7 @@ package backend;
 import java.sql.*;
  
 /**
- * This program demonstrates how to establish database connection to Microsoft
- * SQL Server.
- * @author www.codejava.net
+ * Classe pour la connexion vers la base de données SQL. 
  *
  */
 public class Connexion {

@@ -23,14 +23,6 @@ public class Produit {
     private boolean actif;
     private int qte;
     
-    Produit(String text, String text0, String text1, String text2, String text3, String text4) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public Produit() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     public void Produit(){
         
     }
@@ -101,7 +93,7 @@ public class Produit {
         return fournisseur;
     }
     
-    public void ajouteProduit(Produit prod) {
+    public static void ajouteProduit(String noProduit, String nom, String desc, String quantite, String prix, String codePF) {
         
         Connection conn = Connexion.connecter();
         try{
@@ -112,18 +104,18 @@ public class Produit {
                
                     
                 
-                rs = stmt.executeQuery("INSERT INTO Produits VALUES ('" + prod.getNoProduit() + 
-                        "'," + prod.getPrixU() + ",'" + prod.getCodePFournisseur() + "','" + prod.getDescription() + "','" + prod.getNom() + "," + prod.getQte());
+                rs = stmt.executeQuery("INSERT INTO Produits VALUES ('" + noProduit + 
+                        "'," + prix + ",'" + codePF + "','" + desc + "','" + nom + "'," + quantite + ", 'true');");
                 
         }catch(SQLException e){
-             e.printStackTrace();
+             //e.printStackTrace();
         }
         
         Connexion.fermer(conn);
         
     }
     
-        public void modifierProduit(Produit prod) {
+    public static void modifierProduit(String noProduit, String nom, String desc, String quantite, String prix, String codePF) {
         
         Connection conn = Connexion.connecter();
         try{
@@ -132,19 +124,18 @@ public class Produit {
                 
                 java.util.Date date = new java.util.Date();
                
-                    
-                
-                rs = stmt.executeQuery("UPDATE Produits SET prix = " + prod.getPrixU() + "', codeProduitFournisseur = '" + prod.getCodePFournisseur() + "', description = '" + prod.getDescription() + "', nom = '" + prod.getNom() + ", quantiteEnStock = '" + prod.getQte() + ";'");
+                rs = stmt.executeQuery("UPDATE Produits "
+                        + "SET prix = " + prix + ", codeProduitFournisseur = '" + codePF + "', description = '" + desc + "', nom = '" + nom + "', quantiteEnStock = " + quantite + " WHERE noProduit = '" + noProduit + "';");
                 
         }catch(SQLException e){
-             e.printStackTrace();
+             //e.printStackTrace();
         }
         
         Connexion.fermer(conn);
         
     }
         
-          public void supprimerProduit(Produit prod) {
+    public static void supprimerProduit(String noProduit, String nom, String desc, String quantite, String prix, String codePF) {
         
         Connection conn = Connexion.connecter();
         try{
@@ -153,19 +144,17 @@ public class Produit {
                 
                 java.util.Date date = new java.util.Date();
                
-                    
-                
-                rs = stmt.executeQuery("UPDATE Produits SET actif = false  WHERE noProduit = '" + prod.getNoProduit()+ "';");
+                rs = stmt.executeQuery("UPDATE Produits SET actif = 'false'  WHERE noProduit = '" + noProduit+ "';");
                 
         }catch(SQLException e){
-             e.printStackTrace();
+             //e.printStackTrace();
         }
         
         Connexion.fermer(conn);
         
     }     
 
-    
+    //Va chercher dans la base de données le produit grâce à un numéro de Produit.
     public static Produit getProduitAvNo(String noProduit){
         
         Produit produit = new Produit();
@@ -177,7 +166,7 @@ public class Produit {
             Statement stmt = conn.createStatement();
                 ResultSet rs;
 
-                rs = stmt.executeQuery("SELECT * FROM Produits WHERE noProduit='" + noProduit + "'");
+                rs = stmt.executeQuery("SELECT * FROM Produits WHERE noProduit='" + noProduit + "' AND actif='true';");
                 while ( rs.next() ) {
                     
                     produit.setNoProduit(rs.getString("noProduit"));

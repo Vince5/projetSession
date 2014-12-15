@@ -14,14 +14,10 @@ import java.awt.event.ActionListener;
  *
  * @author Bill
  */
+
+//Interface de la modification et suppression de Produits.
 public class Supprimer extends javax.swing.JFrame implements ActionListener {
 
-    TextField noProduit = new TextField(20);
-    TextField nom = new TextField(20);
-    TextField description = new TextField(20);
-    TextField quantiteEnStock = new TextField(20);
-    TextField prixU = new TextField(20);
-    TextField codeProduitFournisseur = new TextField(20);
     public Produit produit;
     
     public Supprimer() {
@@ -29,12 +25,12 @@ public class Supprimer extends javax.swing.JFrame implements ActionListener {
         super();
         initComponents();
         add(jButton1);
-        add(noProduit);
-        add(nom);
-        add(description);
-        add(quantiteEnStock);
-        add(prixU);
-        add(codeProduitFournisseur);
+        add(jTextField1);
+        add(jTextField2);
+        add(jTextField3);
+        add(jTextField4);
+        add(jTextField5);
+        add(jTextField6);
         jButton1.addActionListener(this);
         jButton2.addActionListener(this);
         
@@ -93,28 +89,14 @@ public class Supprimer extends javax.swing.JFrame implements ActionListener {
         jLabel5.setText("nom :");
 
         jLabel6.setText("quantiteEnStock");
+        
+        jTextField1.setColumns(7);
+        jTextField2.setColumns(7);
+        jTextField3.setColumns(7);
+        jTextField4.setColumns(7);
+        jTextField5.setColumns(7);
+        jTextField6.setColumns(7);
 
-        jTextField1.setText("sdsad");
-
-        jTextField2.setText("fd");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jTextField3.setText("jTextField3");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-
-        jTextField4.setText("jTextField4");
-
-        jTextField5.setText("jTextField5");
-
-        jTextField6.setText("jTextField6");
 
         jLabel7.setText("Gestion produits");
 
@@ -127,7 +109,7 @@ public class Supprimer extends javax.swing.JFrame implements ActionListener {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jButton1)
-                        .addGap(18, 18, 18)
+                        .addGap(30, 30, 160)
                         .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
@@ -203,41 +185,45 @@ public class Supprimer extends javax.swing.JFrame implements ActionListener {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     public void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          
-        produit = new Produit(noProduit.getText(),nom.getText(),description.getText(),quantiteEnStock.getText(),prixU.getText(),codeProduitFournisseur.getText());
+        //produit = new Produit(noProduit.getText(),nom.getText(),description.getText(),quantiteEnStock.getText(),prixU.getText(),codeProduitFournisseur.getText());
         
        if(evt.getSource() == jButton1){
-         noProduit.setText("");
-         nom.setText("");
-         description.setText("");
-         quantiteEnStock.setText("");
-         prixU.setText("");
-         codeProduitFournisseur.setText("");
          
-         produit.supprimerProduit(produit);
+         Produit.supprimerProduit(jTextField1.getText(), jTextField5.getText(), jTextField4.getText(), jTextField6.getText(), jTextField2.getText(), jTextField3.getText());  
+         
+         jTextField1.setText("");
+         jTextField2.setText("");
+         jTextField3.setText("");
+         jTextField4.setText("");
+         jTextField5.setText("");
+         jTextField6.setText("");        
+         
        }
          
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
          
-        produit = new Produit(noProduit.getText(),nom.getText(),description.getText(),quantiteEnStock.getText(),prixU.getText(),codeProduitFournisseur.getText());
+        //produit = new Produit(noProduit.getText(),nom.getText(),description.getText(),quantiteEnStock.getText(),prixU.getText(),codeProduitFournisseur.getText());
         
        
         
         if(evt.getSource() == jButton2){
-         noProduit.setText("");
-         nom.setText("");
-         description.setText("");
-         quantiteEnStock.setText("");
-         prixU.setText("");
-         codeProduitFournisseur.setText("");
          
-         produit.modifierProduit(produit);
+           Produit.modifierProduit(jTextField1.getText(), jTextField5.getText(), jTextField4.getText(), jTextField6.getText(), jTextField2.getText(), jTextField3.getText());  
+
+           jTextField1.setText("");
+           jTextField2.setText("");
+           jTextField3.setText("");
+           jTextField4.setText("");
+           jTextField5.setText("");
+           jTextField6.setText("");  
          
-    }   
+         
+        }   
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -247,16 +233,16 @@ public class Supprimer extends javax.swing.JFrame implements ActionListener {
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
-
+    
     /**
      * @param args the command line arguments
-     */
+     *//*
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+         *//*
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -272,16 +258,16 @@ public class Supprimer extends javax.swing.JFrame implements ActionListener {
             java.util.logging.Logger.getLogger(Supprimer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Supprimer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        }*/
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Supprimer().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -303,6 +289,32 @@ public class Supprimer extends javax.swing.JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(e.getSource() == jButton1){
+         
+         Produit.supprimerProduit(jTextField1.getText(), jTextField5.getText(), jTextField4.getText(), jTextField6.getText(), jTextField2.getText(), jTextField3.getText());  
+         
+         jTextField1.setText("");
+         jTextField2.setText("");
+         jTextField3.setText("");
+         jTextField4.setText("");
+         jTextField5.setText("");
+         jTextField6.setText("");        
+         
+       }
+        
+        if(e.getSource() == jButton2){
+         
+           Produit.modifierProduit(jTextField1.getText(), jTextField5.getText(), jTextField4.getText(), jTextField6.getText(), jTextField2.getText(), jTextField3.getText());  
+
+           jTextField1.setText("");
+           jTextField2.setText("");
+           jTextField3.setText("");
+           jTextField4.setText("");
+           jTextField5.setText("");
+           jTextField6.setText("");  
+         
+         
+        }  
     }
 }

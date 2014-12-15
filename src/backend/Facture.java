@@ -73,12 +73,12 @@ public class Facture {
             totalApTaxes = FonctionsSysteme.CalculerTaxesQC(totalAvTaxes);
             
             //Interface mode de paiement
-            InterCreerFacture inter2 = new InterCreerFacture(model);
+            InterCreerFacture inter2 = new InterCreerFacture(model, this);
             
             //sauvegarderFacture(this);
         }
     }
-    
+    //Fonction non implémentée.
     public void sauvegarderFacture(Facture fac) {
         
         Connection conn = Connexion.connecter();

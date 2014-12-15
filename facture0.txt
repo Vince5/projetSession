@@ -1,0 +1,6 @@
+Facture: 
+Nom Produit 		 Quantite 		 Prix Unitaire 		 Prix Total
+
+ivtublin; 				 33.0 				 1 				 33.0
+Total:		 		 	 		 	 						 38.106337499999995
+ Mode de paiement: Visa

@@ -8,6 +8,7 @@ package backend;
 /**
  *
  * @author Vincent
+ *  Chaque porduit lorsqu'il ajouté dans une facture.
  */
 public class ProduitsFacture {
     

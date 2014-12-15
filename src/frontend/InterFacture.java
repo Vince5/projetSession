@@ -11,6 +11,7 @@ import java.awt.event.*;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
+//Formulaire pour créer une facture
 public class InterFacture implements ActionListener {
 
     private static final String[] NOMS_OPERATIONS = {
@@ -42,6 +43,7 @@ public class InterFacture implements ActionListener {
     
     public InterFacture () {
     	
+        facture = new Facture();
     	/**********Creation Fenetre********************/
     	fenetrePrincipale = new JFrame("Facturation");
     	fenetrePrincipale.setSize(1000, 600);
@@ -84,10 +86,10 @@ public class InterFacture implements ActionListener {
         
     	/************JPanel du bas*********************/
     	menuBas = new JPanel();
-        LArticle = new JLabel("Num�ro Article");
+        LArticle = new JLabel("Numéro Article");
         TArticle = new JTextField(10);
         TArticle.addActionListener(this);
-        LQteArticle = new JLabel("Quantite");
+        LQteArticle = new JLabel("Quantité");
         TQteArticle = new JTextField(2);
         TQteArticle.setText("1");
         TQteArticle.addActionListener(this);
@@ -109,7 +111,7 @@ public class InterFacture implements ActionListener {
         					"Adresse Entreprise <br>" +
         					"Autres infos pertinentes</html>");
     	Date ladate = new Date();
-    	JLabel test = new JLabel("<html><center>FACTURE No XXXXX <div margin-left = 15px>Nom Commis</div><br>"+ladate+"</html>");
+    	JLabel test = new JLabel("<html><center>FACTURE No " + facture.getNoFacture() + " <div margin-left = 15px>Nom Commis</div><br>"+ladate+"</html>");
     	test.setForeground(Color.black);
     	test.setOpaque(true);
     	test.setBackground(Color.WHITE);
@@ -135,7 +137,6 @@ public class InterFacture implements ActionListener {
         
     	fenetrePrincipale.setVisible(true);
         
-        facture = new Facture();
         /*****************************************************/
     }
 	
@@ -144,9 +145,23 @@ public class InterFacture implements ActionListener {
         String noArticle = TArticle.getText();
         int quantite = Integer.parseInt(TQteArticle.getText());
         
-       // affichage.setText(affichage.getText()+""+x+" "+noArticle+" "+quantite+" \n");
+       //Lorsque nous cliquons sur Payer
     	if(e.getSource() == Executer) {  
             facture.confirmationFacture(model);
+            facture = new Facture();
+            
+                    model = new DefaultTableModel();
+                    
+                    model.addColumn("#"); 
+                    model.addColumn("Nom article");
+                    model.addColumn("Prix Unitaire");
+                    model.addColumn("Qte");
+                    model.addColumn("Total");
+
+                    
+                    inventaire.setModel(model);
+              
+            
         }else if(noArticle.equals("")) {
             JOptionPane.showMessageDialog(null,
                 "Entrez un code valide",
@@ -167,13 +182,12 @@ public class InterFacture implements ActionListener {
                     "Erreur",
                     JOptionPane.INFORMATION_MESSAGE);
             }else{
-                //{"#", "Nom Article", "Prix Unitaire", "Qte", "Total"};
-                double montant = leProduit.getPrixU()*quantite;
-                //Object data2[] =  {x, leProduit.getNom(), leProduit.getPrixU(), quantite , montant};
                 
-                // Append a row 
+                //Ajoute dans la table le produit
+                
+                double montant = leProduit.getPrixU()*quantite; 
                 model.addRow(new Object[]{x, leProduit.getNom(), leProduit.getPrixU(), quantite , montant});
-                //data[x] = data2;
+               
                 facture.ajouterProduitFacture(noArticle, x, montant);
                 
                 x++;
@@ -184,8 +198,8 @@ public class InterFacture implements ActionListener {
     private void action(int x) {
     	try {
             JOptionPane.showMessageDialog(null,
-                "Paiement compl�t�",
-                "Succ�s",
+                "Paiement complété",
+                "Succès",
                 JOptionPane.INFORMATION_MESSAGE);
     	}
 	catch (Exception oe) {

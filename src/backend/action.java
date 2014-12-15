@@ -1,28 +1,28 @@
-package frontend;
-import backend.Facture;
-import backend.action;
+package backend;
 import java.util.*;
 import java.awt.*;
 
 import javax.swing.*;
 
 import java.awt.event.*;
+//import java.io.BufferedWriter;
 import java.io.File;
+//import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+//import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
-//Interface de la finalisation et du paiement de facture.
-public class InterCreerFacture implements ActionListener {
+public class action implements ActionListener {
 
     private static final String[] NOMS_OPERATIONS = {
         "Mastercard", // 0
         "Visa",
-        "Débit",
+        "D�bit",
         "Comptant",
     };
 
@@ -31,7 +31,7 @@ public class InterCreerFacture implements ActionListener {
     private static JPanel menuGauche;
     private static JPanel menuBas;
     private static JPanel menuCentre;
-    private static int x=0;
+//    private static int x=0;
     private static JLabel entete;
     private static ButtonGroup ensBouttons;
     private static JTable inventaire;
@@ -45,13 +45,12 @@ public class InterCreerFacture implements ActionListener {
    
     /***********************************************/
     
-    public InterCreerFacture (DefaultTableModel model, Facture facture) {
+    public action () {
     	
-        laFacture = facture;
     	/**********Creation Fenetre********************/
     	fenetrePrincipale = new JFrame("Facturation");
     	fenetrePrincipale.setSize(1000, 600);
-    	fenetrePrincipale.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    	fenetrePrincipale.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	fenetrePrincipale.setLocationRelativeTo(null);
     	/**********************************************/
     	/*************JPanel gauche********************/
@@ -59,14 +58,14 @@ public class InterCreerFacture implements ActionListener {
     	menuGauche.setBorder(BorderFactory.createLineBorder(Color.white));
     	menuGauche.setBackground(Color.WHITE);
     	/**********************************************/
-        /*
+        
         model = new DefaultTableModel();
     	model.addColumn("#");
         model.addColumn("Nom Article");
         model.addColumn("Prix Unitaire");
         model.addColumn("Qte");
         model.addColumn("Total");
-    	*/
+    	
         
         inventaire = new JTable(model);
     	scrollpane = new JScrollPane(inventaire,
@@ -94,7 +93,7 @@ public class InterCreerFacture implements ActionListener {
         					"Adresse Entreprise <br>" +
         					"Autres infos pertinentes</html>");
     	Date ladate = new Date();
-    	JLabel test = new JLabel("<html><center>FACTURE No " + laFacture.getNoFacture() + " <div margin-left = 15px>Nom Commis</div><br>"+ladate+"</html>");
+    	JLabel test = new JLabel("<html><center>FACTURE No XXXXX <div margin-left = 15px>Nom Commis</div><br>"+ladate+"</html>");
     	test.setForeground(Color.black);
     	test.setOpaque(true);
     	test.setBackground(Color.WHITE);
@@ -129,7 +128,7 @@ public class InterCreerFacture implements ActionListener {
         /*****************************************************/
     }
 	
-    //Création du fichier de la facture. Fermeture de cette facture.
+    
     public void actionPerformed ( ActionEvent e ) {
         int ligne = inventaire.getRowCount();
         String nomProd;
@@ -137,6 +136,8 @@ public class InterCreerFacture implements ActionListener {
         String PrixUn;
         String prixTot;
         
+        inventaire.getModel().getValueAt(ligne, 5);
+        if(e.getSource()=="Executer") {
             try {
                 double totApTax = laFacture.getTotalApTaxes();
                 File f = new File("facture"+laFacture.getNoFacture()+".txt");
@@ -145,44 +146,25 @@ public class InterCreerFacture implements ActionListener {
                 String str = "Facture: \n"+
                         "Nom Produit \t\t Quantite \t\t Prix Unitaire \t\t Prix Total\n\n";
                 for(int i=0; i<ligne; i++) {
-                    nomProd = inventaire.getModel().getValueAt(i, 1).toString();
-                    Quant = inventaire.getModel().getValueAt(i, 2).toString();
-                    PrixUn = inventaire.getModel().getValueAt(i, 3).toString();
-                    prixTot = inventaire.getModel().getValueAt(i, 4).toString();
-                    str+= ""+nomProd+" \t\t\t\t "+Quant+" \t\t\t\t "+PrixUn+" \t\t\t\t "+prixTot+"\n";
+                    nomProd = (String) inventaire.getModel().getValueAt(i, 1).toString();
+                    Quant = (String) inventaire.getModel().getValueAt(i, 2).toString();
+                    PrixUn = (String) inventaire.getModel().getValueAt(i, 3).toString();
+                    prixTot = (String) inventaire.getModel().getValueAt(i, 4).toString();
+                    str+= ""+nomProd+" \t\t "+Quant+" \t\t "+PrixUn+" \t\t "+prixTot+"\n";
                 }
-                str+= "Total:\t\t \t\t \t \t\t \t \t\t\t\t\t\t "+totApTax;
-                
-                String modePaiement = "";
-                
-                for ( int i = 0; i < NOMS_OPERATIONS.length; i++ ) {
-                    if(tableauBoutons[i].isSelected()){
-                        modePaiement = NOMS_OPERATIONS[i];
-                    }
-                }
-                str+= "\n Mode de paiement: " + modePaiement;
-                fw.write(str);
-                fw.close();
-                
-                JOptionPane.showMessageDialog(null,
-                "Paiement complété",
-                "Succès",
-                JOptionPane.INFORMATION_MESSAGE);
-                
-                fenetrePrincipale.dispose();
-                
-                
+                str+= "\t\t \t\t \t \t\t \t \t\t "+totApTax;
             }catch (IOException ex) {
                 Logger.getLogger(action.class.getName()).log(Level.SEVERE, null, ex);
             }
             
+        }
     }
-    //Non implémenté
+
     private void action(int x) {
     	try {
             JOptionPane.showMessageDialog(null,
-                "Paiement complété",
-                "Succès",
+                "Paiement compl�t�",
+                "Succ�s",
                 JOptionPane.INFORMATION_MESSAGE);
     	}
 	catch (Exception oe) {
