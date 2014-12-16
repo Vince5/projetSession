@@ -199,7 +199,7 @@ public class Supprimer extends javax.swing.JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        //Supprimer un produit
         if(e.getSource() == jButton1){
             
             Produit leProduit = new Produit();
@@ -213,6 +213,7 @@ public class Supprimer extends javax.swing.JFrame implements ActionListener {
             jTextField5.setText("");
             jTextField6.setText("");        
          
+        //Modifier un produit
         }else if(e.getSource() == jButton2){
             
             try{
@@ -233,15 +234,12 @@ public class Supprimer extends javax.swing.JFrame implements ActionListener {
                 jTextField6.setText("");  
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(null,
-                "Entrez un nombre valide",
+                "Le prix et la quantité doivent être des nombres valides",
                 "Erreur",
                 JOptionPane.ERROR_MESSAGE);
             }
-            
-            
-            
         }else{
-            //Charge les attributs du produit du numéro qu'on a entré
+            //Charge les attributs du produit du numéro qu'on a entré et qu'on tappe sur Entrée
             
             Produit leProduit = Produit.getProduitAvNo(jTextField1.getText());
             
@@ -253,7 +251,7 @@ public class Supprimer extends javax.swing.JFrame implements ActionListener {
                 jTextField6.setText("" + leProduit.getQte() + "");
             }else{
                 JOptionPane.showMessageDialog(null,
-                "Entrez un code valide",
+                "Entrez un numéro de produit valide",
                 "Erreur",
                 JOptionPane.INFORMATION_MESSAGE);
             }

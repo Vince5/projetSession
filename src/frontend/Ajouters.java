@@ -9,6 +9,7 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import backend.Produit;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Bill
@@ -191,29 +192,33 @@ public class Ajouters extends javax.swing.JFrame implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        //Ajouter un produit
         if(e.getSource() == jButton1){
             
-            
-            String noP = jTextField1.getText();
-            String nomP = jTextField5.getText();
-            String descP = jTextField4.getText();
-            int qteP = Integer.parseInt(jTextField6.getText());
-            Double prixP = Double.parseDouble(jTextField2.getText());
-            String fourP = jTextField3.getText();
-            
-            
-            Produit leProduit = new Produit(noP, nomP, descP, qteP, prixP, fourP);
-            
-            leProduit.ajouteProduit();
-          
-            jTextField1.setText("");
-            jTextField2.setText("");
-            jTextField3.setText("");
-            jTextField4.setText("");
-            jTextField5.setText("");
-            jTextField6.setText("");
+            try{
+                String noP = jTextField1.getText();
+                String nomP = jTextField5.getText();
+                String descP = jTextField4.getText();
+                String fourP = jTextField3.getText();
+                int qteP = Integer.parseInt(jTextField6.getText());
+                Double prixP = Double.parseDouble(jTextField2.getText());
+                Produit leProduit = new Produit(noP, nomP, descP, qteP, prixP, fourP); 
                 
+                leProduit.ajouteProduit();
+                
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jTextField6.setText("");  
+          
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,
+                "Le prix et la quantité doivent être des nombres valides",
+                "Erreur",
+                JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }

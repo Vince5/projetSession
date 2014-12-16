@@ -23,13 +23,13 @@ public class ProjetSession {
         // TODO code application logic here
         
         
-        InterFacture inter = new InterFacture();
+        //InterFacture inter = new InterFacture();
         
        //Ajouters ajout = new Ajouters();
        //ajout.setVisible(true);
         
-        //Supprimer sup = new Supprimer();
-       // sup.setVisible(true);
+        Supprimer sup = new Supprimer();
+        sup.setVisible(true);
     }
     
 }
