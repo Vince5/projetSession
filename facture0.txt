@@ -1,7 +1,7 @@
 Facture: 
 Nom Produit 		 Quantite 		 Prix Unitaire 		 Prix Total
 
-abc 				 1.0 				 1 				 1.0
+abc 				 1.0 				 2 				 2.0
 
-Total:		 		 	 		 	 						 1,15
- Mode de paiement: Débit
+Total:		 		 	 		 	 						 2,30
+ Mode de paiement: Mastercard

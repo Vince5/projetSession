@@ -63,14 +63,14 @@ public class Facture {
         return montant;
     }
     
-    public void confirmationFacture(DefaultTableModel model){
+    public void confirmationFacture(DefaultTableModel model, Utilisateur user){
         
         if(!produits.isEmpty()){
         
             totalApTaxes = FonctionsSysteme.CalculerTaxesQC(totalAvTaxes);
             
             //Interface mode de paiement
-            InterCreerFacture inter2 = new InterCreerFacture(model, this);
+            InterCreerFacture inter2 = new InterCreerFacture(model, this, user);
             
         }
     }

@@ -1,5 +1,6 @@
 package frontend;
 import backend.Facture;
+import backend.Utilisateur;
 import backend.action;
 import java.util.*;
 import java.awt.*;
@@ -45,7 +46,7 @@ public class InterCreerFacture implements ActionListener {
    
     /***********************************************/
     
-    public InterCreerFacture (DefaultTableModel model, Facture facture) {
+    public InterCreerFacture (DefaultTableModel model, Facture facture, Utilisateur user) {
     	
         laFacture = facture;
     	/**********Creation Fenetre********************/
@@ -94,7 +95,7 @@ public class InterCreerFacture implements ActionListener {
         					"Adresse Entreprise <br>" +
         					"Autres infos pertinentes</html>");
     	Date ladate = new Date();
-    	JLabel test = new JLabel("<html><center>FACTURE No " + laFacture.getNoFacture() + " <div margin-left = 15px>Nom Commis</div><br>"+ladate+"</html>");
+    	JLabel test = new JLabel("<html><center>FACTURE No " + laFacture.getNoFacture() + " <div margin-left = 15px>" + user.getPrenom() + " " + user.getNom() + "</div><br>"+ladate+"</html>");
     	test.setForeground(Color.black);
     	test.setOpaque(true);
     	test.setBackground(Color.WHITE);

@@ -1,6 +1,7 @@
 package frontend;
 import backend.Facture;
 import backend.Produit;
+import backend.Utilisateur;
 import java.util.*;
 import java.awt.*;
 
@@ -36,13 +37,18 @@ public class InterFacture implements ActionListener {
     private static JTextArea affichage;
     private static JScrollPane scrollpane;
     private Facture facture;
+    private Utilisateur user = new Utilisateur();
     
     Object[][] data = new Object[1][];
    
     /***********************************************/
     
-    public InterFacture () {
+    public InterFacture() {}
+    
+    public InterFacture (Utilisateur luser) {
     	
+        
+    	user = luser;
         facture = new Facture();
     	/**********Creation Fenetre********************/
     	fenetrePrincipale = new JFrame("Facturation");
@@ -111,7 +117,7 @@ public class InterFacture implements ActionListener {
         					"Adresse Entreprise <br>" +
         					"Autres infos pertinentes</html>");
     	Date ladate = new Date();
-    	JLabel test = new JLabel("<html><center>FACTURE No " + facture.getNoFacture() + " <div margin-left = 15px>Nom Commis</div><br>"+ladate+"</html>");
+    	JLabel test = new JLabel("<html><center>FACTURE No " + facture.getNoFacture() + " <div margin-left = 15px>" + user.getPrenom() + " " + user.getNom() + "</div><br>"+ladate+"</html>");
     	test.setForeground(Color.black);
     	test.setOpaque(true);
     	test.setBackground(Color.WHITE);
@@ -147,7 +153,7 @@ public class InterFacture implements ActionListener {
         
        //Lorsque nous cliquons sur Payer
     	if(e.getSource() == Executer) {  
-            facture.confirmationFacture(model);
+            facture.confirmationFacture(model, user);
             facture = new Facture();
             
                     model = new DefaultTableModel();
